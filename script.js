@@ -2,7 +2,6 @@
 // Variables globales
 //
 let currentRowId = null;
-const main = document.getElementById('exp-main');
 //
 // Gestion de la ligne du tableau sélectionnée
 function HighlightSelectedRow(id) {
@@ -106,8 +105,10 @@ grist.ready({
   allowSelectBy: true           // Permet de choisir ce widget comme input d'un autre widget
 });
 grist.onRecords(table => {
+  const main = document.getElementById('exp-main');
+  if (!main) return; // Au cas où le DOM ne serait pas prêt
   //On vide l'explorateur
-  main.innerHTML=""; 
+  main.textContent=""; 
   // On récupère les colonnes mappées
   const mapped = grist.mapColumnNames(table[0]);
   let curgroup = 0;
